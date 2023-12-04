@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LEGaussians: Language Embedded 3D Gaussians for Open-Vocabulary Scene Understanding">
+  <meta name="keywords" content="3D Gaussians, Language Embedded 3D Scene Representation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEGaussians</title>
+
+  <!-- Bootstrap -->
+  <link href="static/css/bootstrap-4.4.1.css" rel="stylesheet">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2NT8PJYCQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-V2NT8PJYCQ');
+  </script>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 publication-title" style="margin-top: 0; margin-bottom: 0">LEGaussians: Language Embedded 3D Gaussians for Open-Vocabulary Scene Understanding</h2>
+          <br/>
+          <h2 class="title is-5 publication-title" style="color:#6e6e6e;margin-top: 2; margin-bottom: 2"></h2>
+  
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Jin-Chuan Shi<sup>1</sup>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="http://miaowang.me/">Miao Wang</a><sup>1, 2</sup>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="author-block">
+              Hao-Bin Duan<sup>1</sup>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="author-block">
+              Shao-Hua Guan<sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>State Key Laboratory of Virtual Reality Technology and Systems, Beihang University</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Zhongguancun Laboratory</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!--
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" href="https://arxiv.org/abs/2311.18482">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!--
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark disabled">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!--
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>
+              -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!--
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./resources/teaser.png"
+                type="video/mp4">
+      </video>
+      -->
+      <img src="./resources/teaser.png" class="center">
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px">
+        <!-- The top row visualizes the original image, novel view synthesis result with query relevancy and PCA of learned semantic features. 
+        The bottom row compares our method with other language-embedded representations. The right-side bar maps relevancy values to heatmap colors. 
+        Our method achieves better fidelity and query accuracy while rendering at higher frame rates. -->
+        TL;DR: We present Language Embedded 3D Gaussians, a novel efficient scene representation for open-vocabulary querying. 
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Reconstructions</h2>
+
+        <div class="embed-responsive embed-responsive-16by9">
+
+          <iframe style="clip-path: inset(1px 1px)" src="https://sketchfab.com/playlists/embed?collection=abee3cc1a7a7436c804f2bd3aadc2acd" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" mozallowfullscreen="true" webkitallowfullscreen="true" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+-->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Open-vocabulary querying in 3D space is challenging but essential for scene understanding tasks such as object localization and segmentation. 
+            Language-embedded scene representations have made progress by incorporating language features into 3D spaces. 
+            However, their efficacy heavily depends on neural networks that are resource-intensive in training and rendering. 
+            Although recent 3D Gaussians offer efficient and high-quality novel view synthesis, directly embedding language features in them leads to prohibitive memory usage and decreased performance. 
+            In this work, we introduce <b>Language Embedded 3D Gaussians</b>, a novel scene representation for open-vocabulary query tasks. 
+            Instead of embedding high-dimensional raw semantic features on 3D Gaussians, we propose a dedicated quantization scheme that drastically alleviates the memory requirement, and a novel embedding procedure that achieves smoother yet high accuracy query, countering the multi-view feature inconsistencies and the high-frequency inductive bias in point-based representations. 
+            Our comprehensive experiments show that our representation achieves the best visual quality and language querying accuracy across current language-embedded representations, while maintaining real-time rendering frame rates on a single desktop GPU.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <!-- Paper video. -->
+    <!--
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -20px">Overview</h2>
+
+        <img src="./resources/overview.png" class="center" width="100%">
+        <div class="content has-text-justified">
+          <p style="margin-top: 30px">
+            The training process for Language-embedded 3D Gaussians starts with initializing scenes following 3D Gaussian Splatting and randomly initializing semantic features and setting uncertainty to zero. Dense language features from multi-view CLIP and DINO are quantized to create a discrete feature space and semantic indices. These attributes of the 3D Gaussians are then rendered into 2D maps using a differentiable rasterizer. The optimization is achieved through semantic and adaptive spatial smoothing loss.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Results</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Quantitative comparison of our method with DFF, LeRF, 3DOVS. 
+            The table presents a comparison across various metrics, including novel view synthesis quality, open-vocabulary query accuracy, and computational efficiency. We report both host memory and video memory usage, as well as the disk space used for storing the learned language features. Our approach outperforms others in rendering quality and semantic query accuracy, while also offering lower computational demands and a significant speed increase, nearly 100 times faster in inference.
+            <br>
+          </p>
+        </div>
+    
+        <div class="content has-text-centered">
+          <img src="./resources/table.png" class="center" width="100%">
+        </div>    
+
+        <div class="content has-text-justified">
+          <p>
+            Comparison of novel view synthesis and query relevance visualization. Left to right: Ground truth novel view synthesis, novel view images with relevance visualization from our method, DFF, LeRF, and 3DOVS. Top to bottom: Query words ``asphalt ground'', ``bicycle'', ``jar of coconut oil'', ``flower'', ``LEGO Technic 856 Bulldozer'', and ``brown shoes''.
+            <br>
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./resources/comp.png" class="center" width="100%">
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            Examples of various open-vocabulary queries. 
+            Our approach enables accurate open-vocabulary queries using a diverse class of word types, including but not limited to, visual attributes, general terms, materials, olfactory properties, and related actions.
+            <br>
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./resources/open.png" class="center" width="100%">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Video Results</h2>
+
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/bicycle.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/garden.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/counter.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/room.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/bonsai.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item">
+          <video id="replay-video"
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                loop
+                width="100%"
+                height="100%">
+            <source src="./resources/kitchen.mp4" type="video/mp4">
+          </video>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    
+    <div class="content has-text-justified">
+      <p>
+        If you find this work useful for your work, please cite us:
+      </p>
+    </div>
+
+    <pre><code>@misc{shi2023language,
+  title={Language Embedded 3D Gaussians for Open-Vocabulary Scene Understanding}, 
+  author={Jin-Chuan Shi and Miao Wang and Hao-Bin Duan and Shao-Hua Guan},
+  year={2023},
+  eprint={2311.18482},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}</code></pre>
+  </div>
+</section>
+
+
+
+<!-- <section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    The authors express gratitude to the anonymous reviewers for their valuable feedback. 
+    This work was supported by the National Natural Science Foundation of China (Project Number: 61932003) and the Fundamental Research Funds for the Central Universities. 
+  </div>
+</section> -->
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
+            We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+          </p>
+        </div>
+      </div>
+          <p></p>
+        </div>
+      </div>
+</footer>
+
+</body>
+</html>
